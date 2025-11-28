@@ -7,12 +7,19 @@ import pathspec
 
 import os
 from datetime import datetime
+import re
 
 import difflib
 
 class FileType(enum.Enum):
     Local = 1
     Remote = 2
+
+def sanitize_filename(filename):
+    """Replace Windows-invalid characters in filename"""
+    # Windows doesn't allow: < > : " | ? * \ /
+    invalid_chars = r'[<>:"|?*\\/]'
+    return re.sub(invalid_chars, '_', filename)
 
 class FileObj():
     def __init__(self, filetype = FileType.Local):
@@ -43,10 +50,14 @@ class FileObj():
         if self.type == FileType.Remote:
             if self.name is not None and self.dir is not None:
                 fi = dwa.get_fileinfo(self.name, self.dir)
-                lm = datetime.strptime(fi['lastModified'], TIMESTAMP_FMT)
-                lm = datetime.timestamp(lm)
-                self.setTime(lm)
-                self.setSize(fi['size'])
+                if 'lastModified' in fi and fi['lastModified']:
+                    lm = datetime.strptime(fi['lastModified'], TIMESTAMP_FMT)
+                    lm = datetime.timestamp(lm)
+                    self.setTime(lm)
+                else:
+                    # Fallback to current time if lastModified is missing
+                    self.setTime(datetime.timestamp(datetime.now()))
+                self.setSize(fi.get('size', 0))
                 
     def getFileData(self, dwa):
         return dwa.get_file(self.name, self.dir, True)
@@ -75,7 +86,9 @@ class FileObj():
                 out_dir = os.path.join(local_dir, self.dir)
                 if not os.path.isdir(out_dir):
                     os.makedirs(out_dir, exist_ok=True)
-                outpath = os.path.join(local_dir, self.dir, self.name)
+                # Sanitize filename for Windows compatibility
+                safe_name = sanitize_filename(self.name)
+                outpath = os.path.join(local_dir, self.dir, safe_name)
                 with open(outpath, 'wb') as of:
                     of.write(data)
                     

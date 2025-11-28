@@ -1,0 +1,5 @@
+/www/
+/scans/
+/menu/
+*.log
+*.gcode

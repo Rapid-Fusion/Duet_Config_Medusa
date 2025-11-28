@@ -1,0 +1,5 @@
+; Preheat PP-GF.g
+
+M568 P0 R105:120:150:190 S105:120:150:190 A1
+M568 P4 R150 S150 A1
+M118 P0 S"Preheating Pellet Extruder: PP-GF..." L2

@@ -1,0 +1,7 @@
+G90
+G1 F{global.tool_change_speed}
+
+G53 G1 X-596 Y411 Z35
+G53 G1 Z1205
+G53 G1 X596
+G53 G1 Y-380

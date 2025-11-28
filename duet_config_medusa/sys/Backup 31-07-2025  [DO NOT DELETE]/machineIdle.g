@@ -1,0 +1,1 @@
+set global.printing = false

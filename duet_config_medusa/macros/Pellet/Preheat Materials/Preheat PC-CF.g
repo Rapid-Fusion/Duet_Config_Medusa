@@ -1,0 +1,5 @@
+; Preheat PC-CF.g
+
+M568 P0 R200:240:270:290 S200:240:270:290 A1
+M568 P4 R120 S120 A1
+M118 P0 S"Preheating Pellet Extruder: PC-CF..." L2

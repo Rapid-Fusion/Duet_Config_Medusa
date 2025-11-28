@@ -1,0 +1,37 @@
+M98 P"disablefildetection.g"
+
+if state.currentTool == 2
+    M118 P0 S"Filament LEFT Unloading..." L2
+else
+    M118 P0 S"Filament LEFT Unloading Cancelled. Please select correct tool first!" L2
+    M98 P"enablefildetection.g"
+    M99 ; exit macro
+
+;T2 P0
+G90
+M83
+
+M203 E1838.621:3000:3000:3000:3000:3000:3000          ; reset max extruder speeds
+M201 E500:10000:10000:10000:10000:10000:10000      ; revert extruder accel
+
+M568 P2 R210 S210 A2 ; PLA temp
+M118 P0 S"Heating up to active temperatures..." L2
+M116 P2 S20                        ; wait for heater temperatures to be reached ±20 deg C
+M118 P0 S"Heaters temperatures reached!" L2
+M118 P0 S"Unloading In progress..." L2
+;M302 P1                        ; allow cold extrude
+G1 E-100 F1000 ; unload from extruder slowly
+
+M400
+G4 P20
+
+M203 E1838.621:14000:14000:14000:14000:14000:14000      ; increase max extruder speeds
+M201 E500:1000:1000:1000:1000:1000:1000          ; reduce extruder accel
+G1 E0:-8400:-8400 F{global.loadspeed}     ; Bondtech FAST filament retraction
+M203 E1838.621:3000:3000:3000:3000:3000:3000          ; reset max extruder speeds
+M201 E500:10000:10000:10000:10000:10000:10000      ; revert extruder accel
+
+;set global.filLEFTstatus = false
+M118 P0 S"Filament LEFT retraction complete!" L2
+
+M98 P"enablefildetection.g"

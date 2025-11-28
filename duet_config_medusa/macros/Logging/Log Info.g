@@ -1,0 +1,1 @@
+M118 P0 S{"[INFO] " ^ state.time ^ ": " ^ global.logMessage}

@@ -1,0 +1,5 @@
+; Preheat ABS-GF.g
+
+M568 P0 R110:190:240:260 S110:190:240:260 A1
+M568 P4 R140 S140 A1
+M118 P0 S"Preheating Pellet Extruder: ABS-CF..." L2

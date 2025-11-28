@@ -1,0 +1,4 @@
+*.log
+*.gcode
+!gcodes/Pellet Prints/PETG-GF (T-100GF)/Launch Day Mould Prints/*.gcode
+

@@ -2,6 +2,7 @@ from . command import Command
 from .. util import rrgit_error, data_size, TIMESTAMP_FMT
 from .. log import *
 from . file_ops import *
+import re
 
 import os
 from datetime import datetime
@@ -54,7 +55,10 @@ class Clone(Command):
                 out_dir = os.path.join(self.cfg.dir, fo.dir)
                 if not os.path.isdir(out_dir):
                     os.makedirs(out_dir, exist_ok=True)
-                outpath = os.path.join(self.cfg.dir, path)
+                # Sanitize filename for Windows compatibility  
+                from . file_ops import sanitize_filename
+                safe_name = sanitize_filename(fo.name)
+                outpath = os.path.join(self.cfg.dir, fo.dir, safe_name)
                 with open(outpath, 'wb') as of:
                     of.write(data)
                     

@@ -1,0 +1,55 @@
+M98 P"disablefildetection.g"
+
+if state.currentTool == 2
+    M118 P0 S"Waiting for filament LEFT to be loaded through filament sensor..." L2
+else
+    M118 P0 S"Filament LEFT Loading Cancelled. Please select correct tool first!" L2
+    M98 P"enablefildetection.g"
+    M99 ; exit macro
+
+if sensors.gpIn[17].value == 1 ; filament already loaded
+    M118 P0 S"Filament already present. Filament LEFT Loading Cancelled." L2
+    M98 P"enablefildetection.g"
+    M99 ; exit macro
+
+;T2 P0
+G90
+M83
+
+set global.timer_5 = state.time + 60
+while true
+    if sensors.gpIn[17].value == 1
+        M118 P0 S"Filament detected. Loading filament..." L2
+        break
+    elif state.time > global.timer_5
+        M118 P0 S"No filament detection after 60 seconds. Filament LEFT Loading Cancelled." L2
+        M99
+    G4 P500 ; debounce
+
+M203 E1838.621:3000:3000:3000:3000:3000:3000          ; reset max extruder speeds
+M201 E500:10000:10000:10000:10000:10000:10000      ; revert extruder accel
+
+M302 P1                        ; allow cold extrude
+G1 E0:100:100 F500                ; grab filament (Bondtech only)
+G92 E0
+M302 P0                        ; disable cold extrude
+
+M568 P2 R250 S250 A2 ; PETG-CF temp
+M118 P0 S"Heating up to active temperatures..." L2
+M116 P2 S20                        ; wait for heater temperatures to be reached ±20 deg C
+M118 P0 S"Heaters temperatures reached!" L2
+
+M400
+
+M203 E1838.621:14000:14000:14000:14000:14000:14000      ; increase max extruder speeds
+M201 E500:1000:1000:1000:1000:1000:1000          ; reduce extruder accel
+G1 E0:7500:7500 F{global.loadspeed}     ; Bondtech FAST filament insertion
+M203 E1838.621:3000:3000:3000:3000:3000:3000          ; reset max extruder speeds
+M201 E500:10000:10000:10000:10000:10000:10000      ; revert extruder accel
+
+G1 E600 F300 ; insert into extruder slowly
+
+;set global.filLEFTstatus = true
+M118 P0 S"Filament LEFT insertion & purge complete!" L2
+
+M98 P"enablefildetection.g"

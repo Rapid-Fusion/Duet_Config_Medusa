@@ -1,0 +1,163 @@
+; StressTest8hr.g
+
+G90 ; absolute coordinates
+
+M208 X-646:646 Y-450:690 ; set limits
+
+if (global.x_motors_homed == false || global.y_motors_homed == false || global.z_motors_homed == false)
+    G28 ; home
+
+M118 P0 S"8hr Stress Test Starting!" L2
+
+G1 Z1200 F3600 ; Move down
+set global.tool_change_speed = 7200 ; 120 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z1000 F3600 ; Move down
+set global.tool_change_speed = 6480 ; 108 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z800 F3600 ; Move down
+set global.tool_change_speed = 5760 ; 96 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z600 F3600 ; Move down
+set global.tool_change_speed = 5040 ; 84 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z400 F3600 ; Move down
+set global.tool_change_speed = 4320 ; 72 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z200 F3600 ; Move down
+set global.tool_change_speed = 3600 ; 60 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z100 F3600 ; Move down
+set global.tool_change_speed = 2880 ; 48 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z50 F3600 ; Move down
+set global.tool_change_speed = 2160 ; 36 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z0 F3600 ; Move down
+set global.tool_change_speed = 1440 ; 24 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+G1 Z0 F3600 ; Move down
+set global.tool_change_speed = 720 ; 12 mm/s
+M400
+G4 P20 ; debounce
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+M98 P"Motion Tests/XY-Square.g"
+
+set global.tool_change_speed = 7200 ; 120 mm/s
+M118 P0 S"8hr Stress Test Complete!" L2
