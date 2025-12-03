@@ -18,7 +18,7 @@ G90                            ; absolute coordinates
 M208 S1 X{global.xmin}         ; set x axis minima
 M208 S0 X{global.xmax}         ; set x axis maxima
 M208 S1 Y{global.tool_limit_y} ; set y axis minima
-M208 S0 Y690                   ; set y axis maxima - DO NOT CHANGE AS ALLOWS ymax to be exceeded for Y-HOMING
+M208 S0 Y{global.ymax}		   ; set y axis maxima
 M208 S1 Z{global.zmin}         ; set z axis minima
 M208 S0 Z{global.framezheight} ; set z axis maxima
 
@@ -63,14 +63,19 @@ while true
 
 		if state.currentTool == -1 ; no tool
 			G92 X0 Y0 Z1205
+			M208 S1 Z{global.zmin}         ; set z axis minima
 		elif state.currentTool == 0 ; pellet tool
 			G92 X{tools[0].offsets[0]} Y{tools[0].offsets[1]} Z1205
+			M208 S1 Z{-global.pellet_offset} ; Set Machine Z-min limit
 		elif state.currentTool == 1 ; spindle tool
 			G92 X{tools[1].offsets[0]} Y{tools[1].offsets[1]} Z1205
+			M208 S1 Z{-global.cnc_offset} ; Set Machine Z-min limit
 		elif state.currentTool == 2 ; filament tool LEFT
 			G92 X{tools[2].offsets[0]} Y{tools[2].offsets[1]} Z1205
+			M208 S1 Z{-global.filament_LEFT_offset} ; Set Machine Z-min limit
 		elif state.currentTool == 3 ; filament tool RIGHT
 			G92 X{tools[3].offsets[0]} Y{tools[3].offsets[1]} Z1205
+			M208 S1 Z{-global.filament_RIGHT_offset} ; Set Machine Z-min limit
 
 		;M400
 		;G4 P100

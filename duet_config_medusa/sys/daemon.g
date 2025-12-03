@@ -10,21 +10,21 @@ while true
     elif (sensors.gpIn[0].value == 1 && sensors.gpIn[1].value == 0) ; IF LOCKED
         set global.toolChangerPistonState = "Locked"
     else
-        G4 P200 ; debounce
+        G4 P20 ; debounce
         if (sensors.gpIn[0].value == 0 && sensors.gpIn[1].value == 0) || (sensors.gpIn[0].value == 1 && sensors.gpIn[1].value == 1)
-            M18 ; Disable all motors
-            set global.toolChangerPistonState = "Fault"
+            ;M18 ; Disable all motors
+            ;set global.toolChangerPistonState = "Fault"
 
             ; display message every 60 seconds
             if state.time > global.solenoid_timer
                 ;M98 P"Pellet Feed DISABLE.g"
-                M118 P0 S"Tool Changer solenoid failure. Check piston position and compressor air pressure." L1
+                M118 P0 S"WARNING: Tool Changer solenoid fault or interference. Check piston position and compressor air pressure." L1
                 M118 P0 S{"Tool Changer Piston Sensor (TOP): "^(sensors.gpIn[0].value)^" | Tool Changer Piston Sensor (BOTTOM): "^(sensors.gpIn[1].value)^" | 0 = Inactive, 1 = Active"} L1 ; WARNING
                 set global.solenoid_timer = state.time + 60
 
-            if exists(job.build) ; if job build exists
-                M25 ; pause print
-                M118 P0 S"Print Paused. Resolve before continuing print!!!" L1
+            ;if exists(job.build) ; if job build exists
+                ;M25 ; pause print
+                ;M118 P0 S"Print Paused. Resolve before continuing print!!!" L1
                 ;M0 ; unconditional stop with heaters off
 
 

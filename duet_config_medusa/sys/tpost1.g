@@ -96,6 +96,8 @@ if (sensors.gpIn[0].value == 0 && sensors.gpIn[1].value == 1)                   
     M208 S1 Y{global.tool_limit_y} ; Reset Y limits
     M201 Y{global.accel_xy} ; Reset Y accel (mm/s^2)
 
+    M208 S1 Z{-global.cnc_offset} ; Set Machine Z-min limit
+
     M118 P0 S"CNC Tool Picked Up!" L2
 
     set global.spindle_tool_handshake = "received" ; Handshake Signal for UI

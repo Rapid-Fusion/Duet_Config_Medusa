@@ -92,6 +92,8 @@ if (sensors.gpIn[0].value == 0 && sensors.gpIn[1].value == 1)                   
     M208 S1 Y{global.tool_limit_y} ; Reset Y limits
     M201 Y{global.accel_xy} ; Reset Y accel (mm/s^2)
 
+    M208 S1 Z{-global.pellet_offset} ; Set Machine Z-min limit
+
     M118 P0 S"Pellet Tool Picked Up!" L2
     M200 S0 ; Volumetric Extrusion Enabled
     ;M221 S100 ;Extrusion Mulipulier 

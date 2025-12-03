@@ -492,7 +492,7 @@ M308 S3 P"5.spi.cs3" Y"rtd-max31865" A"Nozzle"
 ; Create heaters
 M950 H0 C"5.out2" T0                                                    ; create Top heater output and map it to sensor 0
 M950 H1 C"5.out3" T1                                                    ; create Middle heater output and map it to sensor 1
-M950 H2 C"5.out7" T2                                                    ; create Bottom heater output and map it to sensor 2
+M950 H2 C"5.out9" T2                                                    ; create Bottom heater output and map it to sensor 2
 M950 H3 C"5.out8" T3                                                    ; create Nozzle heater output and map it to sensor 3
 
 ; Set PID heater parameters
@@ -525,7 +525,7 @@ M950 F3 C"!5.out5+out5.tach" Q100 A"Middle Fan"                         ; Middle
 M950 F4 C"!5.out6+out6.tach" Q100 A"Bottom Fan"                         ; Bottom Fan -- 4-wire 24V PWM fan so invert it, 100Hz PWM, tacho connected
 
 ; Motor & Gearbox Cooling Fans
-M950 F5 C"5.out9" Q100 A"Motor & Gearbox Fans"                          ; Motor & Gearbox Fans - 2-wire 24V, 100Hz PWM, NO tach feedback (Always On)
+M950 F5 C"5.out7" Q100 A"Motor & Gearbox Fans"                          ; Motor & Gearbox Fans - 2-wire 24V, 100Hz PWM, NO tach feedback (Always On)
 
 ; Fan Control
 ;M98 P"FansDefault.g"

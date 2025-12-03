@@ -21,6 +21,7 @@ if global.toolChangerPistonState == "Fault"
 
 if state.previousTool == 3
     ;M98 P"checkfilamentLEFT.g"                            ; check LEFT filament status
+    M208 S1 Z{-global.filament_RIGHT_offset} ; Set Machine Z-min limit
     M118 P0 S"Filament Tool LEFT Selected!" L2
     set global.filament_tool_handshake = "received" ; Handshake Signal for UI
     M99
@@ -107,6 +108,8 @@ if (sensors.gpIn[0].value == 0 && sensors.gpIn[1].value == 1)                   
 
     M208 S1 Y{global.tool_limit_y} ; Reset Y limits
     M201 Y{global.accel_xy} ; Reset Y accel (mm/s^2)
+
+    M208 S1 Z{-global.filament_LEFT_offset} ; Set Machine Z-min limit
 
     M118 P0 S"Filament Tool Picked Up!" L2
     M118 P0 S"Filament Tool LEFT Selected!" L2
